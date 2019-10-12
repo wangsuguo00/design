@@ -1,25 +1,17 @@
 package visitor;
 
-import visitor.company.ArticleCompany;
-import visitor.company.Company;
-import visitor.company.NormalCompany;
-import visitor.material.IronMaterial;
-import visitor.material.Material;
-import visitor.material.PaperMaterial;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.objectweb.asm.util.TraceClassVisitor;
+import org.objectweb.asm.ClassReader;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Material> materialList = new ArrayList<>();
-        materialList.add(new PaperMaterial());
-        materialList.add(new IronMaterial());
+    public static void main(String[] args) throws IOException {
 
-        Company company = new ArticleCompany();
-        materialList.forEach(v-> System.out.println("艺术公司生产："+v.accept(company)));
-
-        Company normalCompany = new NormalCompany();
-        materialList.forEach(v-> System.out.println("普通公司生产："+v.accept(normalCompany)));
+        ClassReader classReader = new ClassReader("java.lang.String");
+        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(new PrintWriter(System.out));
+        classReader.accept(traceClassVisitor,1);
     }
 }

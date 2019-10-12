@@ -7,4 +7,5 @@ import visitor.material.PaperMaterial;
 public interface Company {
     String create(PaperMaterial material);
     String create(IronMaterial material);
+
 }
